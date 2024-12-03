@@ -1,0 +1,24 @@
+[tool.ruff]
+select = ["E", "F", "W"]   # Проверка базовых ошибок, фатальных ошибок и предупреждений
+ignore = ["E501"]          # Игнорирование ошибки длины строки
+exclude = ["migrations/", ".venv/", "build/", "dist/"]  # Исключение папок с миграциями и виртуальными окружениями
+
+[tool.black]
+line-length = 88              # Максимальная длина строки (совместимо с PEP 8)
+target-version = ["py39"]     # Целевая версия Python (замените на вашу версию, если необходимо)
+exclude = '''
+/(
+    .venv                    # Исключение виртуального окружения
+  | build                    # Исключение папки сборки
+  | dist                     # Исключение папки дистрибутива
+  | migrations               # Исключение миграций
+  | __pycache__              # Исключение кеша
+)/
+
+[tool.isort]
+profile = "black"            # Использует профиль Black для совместимости
+line_length = 88             # Совпадает с Black
+multi_line_output = 3        # Импорты в несколько строк с висячей запятой
+include_trailing_comma = true # Включение висячей запятой для удобства диффов
+known_third_party = ["flask", "requests"]  # Указание сторонних библиотек
+sections = ["FUTURE", "STDLIB", "THIRDPARTY", "FIRSTPARTY", "LOCALFOLDER"]

@@ -1,0 +1,45 @@
+name: Linting
+
+on:
+  pull_request:
+    branches:
+      - main  # Линтинг будет запускаться при PR в ветку main
+  push:
+    branches:
+      - main  # Линтинг будет запускаться при push в ветку main
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest  # Рабочая среда (Ubuntu в данном случае)
+    
+    steps:
+      # Checkout репозитория
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      
+      # Установка Python
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'  # Указание версии Python
+
+      # Установка зависимостей
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install black ruff isort  # Установка Black, Ruff и isort
+
+      # Запуск Black
+      - name: Run Black
+        run: |
+          black --check .  # Проверка кода с помощью Black (без изменения)
+
+      # Запуск Ruff
+      - name: Run Ruff
+        run: |
+          ruff check .  # Проверка кода с помощью Ruff
+
+      # Запуск isort
+      - name: Run isort
+        run: |
+          isort --check-only .  # Проверка импорта с помощью isort (без изменения)

@@ -1,0 +1,21 @@
+repos:
+  - repo: https://github.com/pre-commit/mirrors-black  # Репозиторий с хуком Black
+    rev: 23.9.1  # Версия Black, используемая для проверки
+    hooks:
+      - id: black  # Идентификатор хука
+        args: [--line-length=88]  # Аргументы, передаваемые Black
+        stages: [commit]  # Когда запускать хук (commit, push и т.д.)
+
+  - repo: https://github.com/charliermarsh/ruff-pre-commit  # Репозиторий с Ruff
+    rev: v0.50.0  # Версия Ruff
+    hooks:
+      - id: ruff
+        args: [--fix, --show-source]  # Автоматическое исправление и показ ошибок
+        stages: [commit]
+
+  - repo: https://github.com/pre-commit/mirrors-isort  # Репозиторий с isort
+    rev: v5.12.0  # Версия isort
+    hooks:
+      - id: isort
+        args: [--profile=black]  # Аргументы для совместимости с Black
+        stages: [commit]
