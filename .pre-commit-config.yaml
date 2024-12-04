@@ -7,7 +7,7 @@ repos:
         stages: [commit]  # Когда запускать хук (commit, push и т.д.)
 
   - repo: https://github.com/charliermarsh/ruff-pre-commit  # Репозиторий с Ruff
-    rev: v0.50.0  # Версия Ruff
+    rev: v0.8.0  # Версия Ruff
     hooks:
       - id: ruff
         args: [--fix, --show-source]  # Автоматическое исправление и показ ошибок
